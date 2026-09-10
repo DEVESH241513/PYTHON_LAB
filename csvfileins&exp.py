@@ -1,36 +1,26 @@
 import pandas as pd
-import matplotlib.pyplot as plt
 
-# Read CSV file
-data = pd.read_csv("students.csv")
+df = pd.read_csv("students.csv")
 
-# Display data
-print("Student Data:")
-print(data)
+print("Data:")
+print(df)
 
-# First five records
-print("\nFirst 5 Records:")
-print(data.head())
+print("\nRows and Columns:")
+print(df.shape)
 
-# Dataset information
-print("\nDataset Information:")
-print(data.info())
+print("\nData Types:")
+print(df.dtypes)
 
-# Missing values
-print("\nMissing Values:")
-print(data.isnull().sum())
+print ("\nSummary : ")
+print(df.describe())
 
-# Statistical summary
-print("\nStatistical Summary:")
-print(data.describe())
+filtered = df[df["Marks"] >= 50]
 
-# Students with marks greater than 80
-print("\nStudents with Marks > 80:")
-print(data[data["Marks"] > 80])
+print("\nFiltered Data:")
+print(filtered)
 
-# Visualization
-data["Marks"].plot(kind="bar")
-plt.title("Student Marks")
-plt.xlabel("Students")
-plt.ylabel("Marks")
-plt.show()
+cleaned = filtered.dropna()
+
+cleaned.to_csv("cleaned_data.csv", index=False)
+
+print("\nCleaned data saved successfully!")
